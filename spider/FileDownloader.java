@@ -11,11 +11,10 @@ public class FileDownloader {
   public String fileURL;
   public String saveFile;
 
-  public FileDownloader(String fileURL, String saveFile) {
 
+  public FileDownloader(String fileURL, String saveFile) {
     this.fileURL = fileURL;
     this.saveFile = saveFile;
-
   }
 
 
