@@ -17,10 +17,11 @@ public class DailyUpdater {
 
   public static void main(String args[]) {
 
-    //Download skaters and 
-    downloadSheets();
+    //Download skaters and goalies csvs
+    //& Uncomment
+    //! downloadSheets();
 
-    //Script to parse csv files and upload to database
+    //Parse csv files and upload to database
 
 
 
