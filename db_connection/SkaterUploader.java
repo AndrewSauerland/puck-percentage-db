@@ -15,21 +15,23 @@ public class SkaterUploader {
 	String dbUrl;
   String dbUsername;
   String dbPassword;
+  String tableName;
   	
-	public SkaterUploader(SkaterReader sR, String dbUrl, String dbUsername, String dbPassword) {
+	public SkaterUploader(SkaterReader sR, String dbUrl, String dbUsername, String dbPassword, String tableName) {
 		this.sR = sR;
     this.dbUrl = dbUrl;
     this.dbUsername = dbUsername;
     this.dbPassword = dbPassword;
+    this.tableName = tableName;
 	}
 	
 	//Creates table
 	public void createTable() throws IOException {
 		
-		String script = "CREATE TABLE " + sR.tableName + " ( " + skaterTableColumns + " ); ";
+		String script = "CREATE TABLE " + tableName + " ( " + skaterTableColumns + " ); ";
 		
 		try {
-      System.out.println("Creating table " + sR.tableName + " in " + dbUrl);
+      System.out.println("Creating table " + tableName + " in " + dbUrl);
 			Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
 			Statement statement = conn.createStatement();
 			statement.executeUpdate(script);
@@ -45,10 +47,10 @@ public class SkaterUploader {
 	public void clearTable() throws IOException {
 		
 		try {
-			System.out.println("Clearing table " + sR.tableName + " in " + dbUrl);
+			System.out.println("Clearing table " + tableName + " in " + dbUrl);
 			Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
 			Statement statement = conn.createStatement();
-			statement.executeUpdate("DELETE FROM " + sR.tableName);
+			statement.executeUpdate("DELETE FROM " + tableName);
 			conn.close();
 		} catch (SQLException e) {
 			System.out.println("Could not clear table");
@@ -60,6 +62,8 @@ public class SkaterUploader {
   //Uses the skaterReader object passed in (containing csv of parsed data) to insert all data into sql line-by-line
 	public void uploadData() throws IOException {
 		
+    System.out.println("Uploading " + tableName);
+
 		String skaterUploadColumns = sR.readFirstLine(sR.path);
 		ArrayList<ArrayList<String>> sRdata = sR.readSkaterData(sR.path);
 		String valuesEntry = "";
@@ -85,7 +89,7 @@ public class SkaterUploader {
         }
 
       //Execute an insert statement containing all persisting fields and values in this line
-      statement.executeUpdate("INSERT INTO " + sR.tableName + " (" + skaterUploadColumns + ") VALUES (" + valuesEntry + ");");
+      statement.executeUpdate("INSERT INTO " + tableName + " (" + skaterUploadColumns + ") VALUES (" + valuesEntry + ");");
       }
 
       conn.close();
@@ -96,7 +100,7 @@ public class SkaterUploader {
       e.printStackTrace();
     }
 
-		System.out.println("Finished table " + sR.tableName);
+		System.out.println("Finished table " + tableName);
 
 	}
 

@@ -8,11 +8,9 @@ import java.util.ArrayList;
 public class SkaterReader {
 
 	public String path;
-	public String tableName;
 	
-	public SkaterReader(String path, String tableName) {
+	public SkaterReader(String path) {
 		this.path = path;
-		this.tableName = tableName;
 	}
 	
 	//Gets headers - Returns ArrayList<String> of headers from "path"
