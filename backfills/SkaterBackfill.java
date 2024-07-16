@@ -1,11 +1,6 @@
 package backfills;
 
-import java.sql.Statement;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
 import db_connection.SkaterUploader;
 import file_processors.SkaterReader;
 
@@ -38,16 +33,6 @@ public class SkaterBackfill {
     }
 
     System.out.println("Complete...");
-
-		// try {
-    //   System.out.println("Testing connection");
-		// 	Connection conn = DriverManager.getConnection(databaseUrl, databaseUsername, databasePassword);
-		// 	System.out.println("Connection Passed");
-		// 	conn.close();
-		// } catch (SQLException e) {
-    //   System.out.println("Could not connect");
-		// 	e.printStackTrace();
-		// }
 		
   }
 
