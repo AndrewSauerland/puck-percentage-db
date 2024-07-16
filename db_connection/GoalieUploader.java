@@ -108,6 +108,9 @@ public class GoalieUploader {
 	}
 
 	//^ All columns defined with their datatype to be used in table creation. These fields will remain constant in every iteration of goalies (No elegant way to do this)
-	String goalieTableColumns = "";
+	String goalieTableColumns = "playerId int, season int, name text, team text, position text, situation text, games_played double, icetime double, xGoals double, goals double, unblocked_shot_attempts double, "
+	+ "xRebounds double, rebounds double, xFreeze double, freeze double, xOnGoal double, ongoal double, xPlayStopped double, playStopped double, xPlayContinuedInZone double, playContinuedInZone double, "
+	+ "xPlayContinuedOutsideZone double, playContinuedOutsideZone double, flurryAdjustedxGoals double, lowDangerShots double, mediumDangerShots double, highDangerShots double, lowDangerxGoals double, "
+	+ "mediumDangerxGoals double, highDangerxGoals double, lowDangerGoals double, mediumDangerGoals double, highDangerGoals double, blocked_shot_attempts double, penalityMinutes double, penalties double";
 
 }
