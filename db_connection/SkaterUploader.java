@@ -17,6 +17,7 @@ public class SkaterUploader {
   String dbPassword;
   String tableName;
   	
+  //& sR object parses csv file, db info used to connect, tableName identifies table to create/access
 	public SkaterUploader(SkaterReader sR, String dbUrl, String dbUsername, String dbPassword, String tableName) {
 		this.sR = sR;
     this.dbUrl = dbUrl;

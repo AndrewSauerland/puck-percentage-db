@@ -15,7 +15,7 @@ public class SkaterBackfill {
     String databasePassword = System.getenv("DATABASE_PASSWORD");
 
     //Loop through years 2008-2023 of hockey sheets and sequentially create/upload each collection to sql
-    while (year <= 2009) {
+    while (year <= 2023) {
 
       System.out.println("Beginning year " + year);
 
