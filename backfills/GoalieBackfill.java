@@ -1,7 +1,6 @@
 package backfills;
 
 import java.io.IOException;
-
 import db_connection.GoalieUploader;
 import file_processors.GoalieReader;
 
@@ -23,7 +22,6 @@ public class GoalieBackfill {
       String isolatedYear = Integer.toString(year).substring(2);
       String filePath = "lib/archive/goalies" + isolatedYear + ".csv";
 
-      System.out.println(filePath);
       GoalieReader fileReader = new GoalieReader(filePath);
       GoalieUploader uploader = new GoalieUploader(fileReader, databaseUrl, databaseUsername, databasePassword, "goalies" + isolatedYear);
       uploader.createTable();

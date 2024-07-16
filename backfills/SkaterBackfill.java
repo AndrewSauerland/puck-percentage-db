@@ -22,7 +22,6 @@ public class SkaterBackfill {
       String isolatedYear = Integer.toString(year).substring(2);
       String filePath = "lib/archive/skaters" + isolatedYear + ".csv";
 
-      System.out.println(filePath);
       SkaterReader fileReader = new SkaterReader(filePath);
       SkaterUploader uploader = new SkaterUploader(fileReader, databaseUrl, databaseUsername, databasePassword, "skaters" + isolatedYear);
       uploader.createTable();
