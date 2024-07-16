@@ -1,0 +1,8 @@
+
+
+# Java specific
+*.class
+
+# downloads library
+lib/downloads
+
