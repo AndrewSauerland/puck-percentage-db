@@ -3,10 +3,11 @@
 # Java specific
 *.class
 
-# downloads library contents
+# library contents
 lib/downloads/*
+lib/archive/*
 
 # keep actual folders
 !lib/downloads
-
+!lib/archive
 
