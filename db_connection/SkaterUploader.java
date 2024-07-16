@@ -23,34 +23,33 @@ public class SkaterUploader {
     this.dbPassword = dbPassword;
 	}
 	
-	
+	//Creates table
 	public void createTable() throws IOException {
 		
 		String script = "CREATE TABLE " + sR.tableName + " ( " + skaterTableColumns + " ); ";
 		
 		try {
+      System.out.println("Creating table " + sR.tableName + " in " + dbUrl);
 			Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
 			Statement statement = conn.createStatement();
 			statement.executeUpdate(script);
-			
 			conn.close();
 		} catch (SQLException e) {
+      System.out.println("Could not create table");
 			e.printStackTrace();
 		}
 		
 	}
 	
-	
+	//Clears table but does not delete it
 	public void clearTable() throws IOException {
 		
 		try {
-			
+			System.out.println("Clearing table " + sR.tableName + " in " + dbUrl);
 			Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
 			Statement statement = conn.createStatement();
 			statement.executeUpdate("DELETE FROM " + sR.tableName);
-			
 			conn.close();
-			
 		} catch (SQLException e) {
 			System.out.println("Could not clear table");
 			e.printStackTrace();
@@ -58,46 +57,50 @@ public class SkaterUploader {
 		
 	}
 	
+  //Uses the skaterReader object passed in (containing csv of parsed data) to insert all data into sql line-by-line
 	public void uploadData() throws IOException {
 		
 		String skaterUploadColumns = sR.readFirstLine(sR.path);
 		ArrayList<ArrayList<String>> sRdata = sR.readSkaterData(sR.path);
-		
-		//This for loop creates a custom string to use where VALUES are defined before importing to SQL
-		for (ArrayList<String> skater : sRdata) {
-			String valuesEntry = "";
-			int counter = 0;
-			int datapoints = skater.size();
-			for (String s : skater) {
-				if (counter >=2 && counter <= 5) {
-					valuesEntry += "\"" + s + "\", ";
-				} else if (datapoints - 1 == counter) {
-					valuesEntry += s;
-				} else {
-					valuesEntry += s + ", ";
-				}
-				counter++;
-			}
-			//System.out.println(valuesEntry);
-			
-			//This try/catch attempts to send SQL an INSERT statement containing all fields in database, executing for each instance
-			try {
-				
-				Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
-				Statement statement = conn.createStatement();
-				statement.executeUpdate("INSERT INTO " + sR.tableName + " (" + skaterUploadColumns + ") VALUES (" + valuesEntry + ");");
-				 
-				conn.close();
-				
-			} catch (SQLException e) {
-				System.out.println("Could not enter " + valuesEntry);
-				e.printStackTrace();
-			}
-		}
+		String valuesEntry = "";
+
+    try {
+      Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+      Statement statement = conn.createStatement();
+
+      //Loop through every line of data, formatting each value as a comma-separated string
+      for (ArrayList<String> entry : sRdata) {
+        valuesEntry = "";
+        int counter = 0;
+        int datapoints = entry.size();
+        for (String value : entry) {
+          if (counter >=2 && counter <= 5) {
+            valuesEntry += "\"" + value + "\", ";
+          } else if (datapoints - 1 == counter) {
+            valuesEntry += value;
+          } else {
+            valuesEntry += value + ", ";
+          }
+          counter++;
+        }
+
+      //Execute an insert statement containing all persisting fields and values in this line
+      statement.executeUpdate("INSERT INTO " + sR.tableName + " (" + skaterUploadColumns + ") VALUES (" + valuesEntry + ");");
+      }
+
+      conn.close();
+      statement.close();
+      
+    } catch (SQLException e) {
+      System.out.println("Could not enter " + valuesEntry);
+      e.printStackTrace();
+    }
+
 		System.out.println("Finished table " + sR.tableName);
+
 	}
 
-  //^ All columns defined with their datatype to be used in table creation (No elegant way to do this)
+  //^ All columns defined with their datatype to be used in table creation. These fields will remain constant in every iteration of skaters (No elegant way to do this)
 	String skaterTableColumns = "playerId int, season int, name text, team text, position text, situation text, games_played int, icetime int, shifts int, gameScore double, "
   + "onIce_xGoalsPercentage double, offIce_xGoalsPercentage double, onIce_corsiPercentage double, offIce_corsiPercentage double, onIce_fenwickPercentage double, "
   + "offIce_fenwickPercentage double, iceTimeRank double, I_F_xOnGoal double, I_F_xGoals double, I_F_xRebounds double, I_F_xFreeze double, I_F_xPlayStopped double, "
