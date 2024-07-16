@@ -8,11 +8,10 @@ import java.util.ArrayList;
 public class GoalieReader {
   
   public String path;
-	public String tableName;
   
-	public GoalieReader(String path, String tableName) {
+	//& Path represents filepath to csv
+	public GoalieReader(String path) {
 		this.path = path;
-		this.tableName = tableName;
 	}
 	
 	//Establish document headers - returns ArrayList<String> of headers from "path"

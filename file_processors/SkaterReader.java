@@ -9,6 +9,7 @@ public class SkaterReader {
 
 	public String path;
 	
+	//& Path represents filepath to csv
 	public SkaterReader(String path) {
 		this.path = path;
 	}

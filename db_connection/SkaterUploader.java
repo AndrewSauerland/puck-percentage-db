@@ -64,11 +64,13 @@ public class SkaterUploader {
 		
     System.out.println("Uploading " + tableName);
 
+    //Obtain data, instantiate variable to persist loop
 		String skaterUploadColumns = sR.readFirstLine(sR.path);
 		ArrayList<ArrayList<String>> sRdata = sR.readSkaterData(sR.path);
 		String valuesEntry = "";
 
     try {
+      //Establish connection
       Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
       Statement statement = conn.createStatement();
 
@@ -92,6 +94,7 @@ public class SkaterUploader {
       statement.executeUpdate("INSERT INTO " + tableName + " (" + skaterUploadColumns + ") VALUES (" + valuesEntry + ");");
       }
 
+      //Close connections
       conn.close();
       statement.close();
       
