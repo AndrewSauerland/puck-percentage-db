@@ -11,11 +11,10 @@ public class FileDownloader {
   public String fileURL;
   public String saveFile;
 
-  public FileDownloader(String fileURL, String saveFile) {
 
+  public FileDownloader(String fileURL, String saveFile) {
     this.fileURL = fileURL;
     this.saveFile = saveFile;
-
   }
 
 
@@ -32,14 +31,14 @@ public class FileDownloader {
       fos.close();
 
     } catch (Exception e) {
-      System.out.println("Trouble saving file " + fileURL);
+      System.out.println("Could not save file from " + fileURL);
       e.printStackTrace();
     }
 
 
   }
 
-
+  //Print variables to console
   public void echos() {
     System.out.println("fileURL = " + this.fileURL);
     System.out.println("saveFile = " + this.saveFile);

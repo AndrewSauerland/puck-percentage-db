@@ -1,3 +1,5 @@
+package file_processors;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -6,11 +8,10 @@ import java.util.ArrayList;
 public class SkaterReader {
 
 	public String path;
-	public String tableName;
 	
-	public SkaterReader(String path, String tableName) {
+	//& Path represents filepath to csv
+	public SkaterReader(String path) {
 		this.path = path;
-		this.tableName = tableName;
 	}
 	
 	//Gets headers - Returns ArrayList<String> of headers from "path"
@@ -22,12 +23,11 @@ public class SkaterReader {
 			headers.add(word);
 		}
 		return headers;
-		
 	}
 	
 	//Reads the first line - Returns first line of "path", unedited
 	public String readFirstLine(String path) throws IOException {
-		try(BufferedReader br = new BufferedReader(new FileReader(path))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 			String line = br.readLine();
 			return formatFirstLine(line);
 		}

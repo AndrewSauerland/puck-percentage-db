@@ -1,0 +1,19 @@
+
+
+# Java specific
+*.class
+
+# library contents
+lib/downloads/*
+lib/archive/*
+
+# keep actual folders
+!lib/downloads
+!lib/archive
+
+# variables script
+*.txt
+
+# track settings.json but otherwise ignore .vscode folder
+.vscode/
+!.vscode/settings.json
