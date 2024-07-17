@@ -22,6 +22,8 @@ public class DailyUpdater {
     //! downloadSheets();
 
     //Parse csv files and upload to database
+    //Include an entry at the end of the databse upload that has the date to ensure upload worked
+
 
 
 
@@ -41,7 +43,7 @@ public class DailyUpdater {
 
   public static void updateDatabase() {
 
-    //TODO Here
+    //! Here
 
   }
 
