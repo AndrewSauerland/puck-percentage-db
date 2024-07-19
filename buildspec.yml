@@ -4,8 +4,17 @@ phases:
   install:
     runtime-versions:
       java: corretto11
+  pre_build:
+    commands:
+      - echo "Listing contents..."
+      - ls -la
   build:
     commands:
+      - echo "Compiling..."
       - javac test.java
-      - java test
+  post_build:
+    commands:
+      - echo "Running..."
+      - java test.java
+
 
