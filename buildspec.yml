@@ -4,13 +4,8 @@ phases:
   install:
     runtime-versions:
       java: corretto11
-  pre_build:
-    commands:
-      - echo Nothing to do in the pre_build phase...
   build:
     commands:
       - javac test.java
       - java test
-  post_build:
-    commands:
-      - echo Build completed on `date`
+
