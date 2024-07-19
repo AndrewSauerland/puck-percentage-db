@@ -71,6 +71,7 @@ public class GoalieUploader {
 		String valuesEntry = "";
 
 		try {
+
 			//Establish connection
       Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
       Statement statement = conn.createStatement();
@@ -101,11 +102,16 @@ public class GoalieUploader {
     } catch (SQLException e) {
       System.out.println("Could not enter " + valuesEntry);
       e.printStackTrace();
-    }
+    } 
 
 		System.out.println("Finished table " + tableName);
 
 	}
+
+	//Adds date in name/situation column to act as version tracker
+  public void addDate() {
+    //TODO here
+  }
 
 	//^ All columns defined with their datatype to be used in table creation. These fields will remain constant in every iteration of goalies (No elegant way to do this)
 	String goalieTableColumns = "playerId int, season int, name text, team text, position text, situation text, games_played double, icetime double, xGoals double, goals double, unblocked_shot_attempts double, "
