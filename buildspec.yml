@@ -7,7 +7,7 @@ phases:
   pre_build:
     commands:
       - echo "Listing contents..."
-      - ls -la
+      - Get-ChildItem -Recurse
   build:
     commands:
       - echo "Compiling..."
