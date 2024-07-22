@@ -18,6 +18,9 @@ phases:
   post_build:
     commands:
       - echo "Running..."
+      - echo $DATABASE_URL
+      - echo $DATABASE_USERNAME
+      - echo $DATABASE_PASSWORD
       - java test.java
       - java -cp ".;lib/mysql-connector-j-8.0.33.jar" dbConnect
 
