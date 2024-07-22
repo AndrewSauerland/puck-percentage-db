@@ -14,9 +14,11 @@ phases:
     commands:
       - echo "Compiling..."
       - javac test.java
+      - javac -cp lib/mysql-connector-j-8.0.33.jar dbConnect.java
   post_build:
     commands:
       - echo "Running..."
       - java test.java
+      - java -cp .;lib/mysql-connector-j-8.0.33.jar dbConnect
 
 
