@@ -9,8 +9,8 @@ phases:
       - echo "Listing contents..."
       - Get-ChildItem -Recurse
       - echo "Setting timezone"
-      - tzselect
-      - export TZ="America/New_York"
+      - ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
+      - echo "America/New_York" > /etc/timezone
   build:
     commands:
       - echo "Compiling..."
