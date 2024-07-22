@@ -29,6 +29,7 @@ public class FileDownloader {
       FileOutputStream fos = new FileOutputStream(saveFile);
       fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
       fos.close();
+      System.out.println("Downloaded file from " + fileURL + " to " + saveFile);
 
     } catch (Exception e) {
       System.out.println("Could not save file from " + fileURL);

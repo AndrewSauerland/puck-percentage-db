@@ -25,7 +25,7 @@ public class DailyUpdater {
   public static void main(String args[]) throws IOException, ClassNotFoundException {
 
     //Download skaters and goalies csvs
-    //! downloadSheets();
+    downloadSheets();
 
     //Parse csv files and upload to database
     //Include an entry at the end of the databse upload that has the date to ensure upload worked
