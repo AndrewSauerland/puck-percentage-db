@@ -8,6 +8,9 @@ phases:
     commands:
       - echo "Listing contents..."
       - Get-ChildItem -Recurse
+      - echo "Setting timezone"
+      - tzselect
+      - export TZ="America/New_York"
   build:
     commands:
       - echo "Compiling..."
