@@ -15,14 +15,10 @@ phases:
       - echo "Compiling..."
       - javac test.java
       - javac -cp lib/mysql-connector-j-8.0.33.jar dbConnect.java
-      - echo "Listing contents..."
-      - Get-ChildItem
   post_build:
     commands:
       - echo "Running..."
       - java test.java
-      - echo "Listing contents..."
-      - Get-ChildItem
-      - java -cp .;lib/mysql-connector-j-8.0.33.jar dbConnect
+      - java -cp ".;lib/mysql-connector-j-8.0.33.jar" dbConnect
 
 
