@@ -6,6 +6,15 @@ public class dbConnect {
   
   public static void main(String args[]) {
 
+    final String databaseEndpoint = System.getenv("DATABASE_URL");
+    final String databaseUsername = System.getenv("DATABASE_USERNAME");
+    final String databasePassword = System.getenv("DATABASE_PASSWORD");
+
+    System.out.println("Printing variables pulled from env");
+    System.out.println(databaseEndpoint);
+    System.out.println(databaseUsername);
+    System.out.println(databasePassword);
+
     Connection conn = null;
 
     try {
