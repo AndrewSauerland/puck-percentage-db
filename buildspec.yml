@@ -13,7 +13,7 @@ phases:
   build:
     commands:
       - echo "Compiling..."
-      - javac -cp lib/mysql-connector-j-8.0.33.jar **/*.java
+      - Get-ChildItem -Recurse -Filter *.java -Path src | ForEach-Object { javac -cp lib/mysql-connector-j-8.0.33.jar -d bin $_.FullName }
       - Get-ChildItem -Recurse
   post_build:
     commands:
