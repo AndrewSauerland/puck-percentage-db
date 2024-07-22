@@ -4,16 +4,24 @@ import java.sql.SQLException;
 
 public class dbConnect {
   
+    public String varOne;
+    public String varTwo;
+    public String varThree;
+
+    public dbConnect() {
+        System.out.println("Mapping variables");
+        varOne = System.getenv("DATABASE_URL");
+        varTwo = System.getenv("DATABASE_USERNAME");
+        varThree = System.getenv("DATABASE_PASSWORD");
+    }
+
   public static void main(String args[]) {
 
-    final String databaseEndpoint = System.getenv("DATABASE_URL");
-    final String databaseUsername = System.getenv("DATABASE_USERNAME");
-    final String databasePassword = System.getenv("DATABASE_PASSWORD");
-
+    dbConnect testClass = new dbConnect();
     System.out.println("Printing variables pulled from env");
-    System.out.println(databaseEndpoint);
-    System.out.println(databaseUsername);
-    System.out.println(databasePassword);
+    System.out.println(testClass.varOne);
+    System.out.println(testClass.varTwo);
+    System.out.println(testClass.varThree);
 
     Connection conn = null;
 
