@@ -14,7 +14,6 @@ phases:
     commands:
       - echo "Compiling..."
       - Get-ChildItem -Recurse -Filter *.java | ForEach-Object { javac -cp "lib/mysql-connector-j-8.0.33.jar;." $_.FullName }
-      - Get-ChildItem -Recurse
   post_build:
     commands:
       - echo "Running..."
