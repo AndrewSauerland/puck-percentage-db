@@ -37,6 +37,7 @@ public class GoalieUploader {
 			Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
 			Statement statement = conn.createStatement();
 			statement.executeUpdate(script);
+			statement.close();
 			conn.close();
 		} catch (SQLException e) {
       System.out.println("Could not create table");
@@ -53,6 +54,7 @@ public class GoalieUploader {
 			Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
 			Statement statement = conn.createStatement();
 			statement.executeUpdate("DELETE FROM " + tableName);
+			statement.close();
 			conn.close();
 		} catch (SQLException e) {
 			System.out.println("Could not clear table");
@@ -97,8 +99,8 @@ public class GoalieUploader {
       }
 
 			//Close connections
+			statement.close();
       conn.close();
-      statement.close();
       
     } catch (SQLException e) {
       System.out.println("Could not enter " + valuesEntry);
@@ -124,8 +126,8 @@ public class GoalieUploader {
       statement.executeUpdate("INSERT INTO " + tableName + " (name, situation) VALUES (\"DATE\", \"" + now + " \");");
 
       //Close connections
+			statement.close();
       conn.close();
-      statement.close();
       
     } catch (SQLException e) {
       System.out.println("Could not enter date/time");
@@ -133,7 +135,7 @@ public class GoalieUploader {
     }
 
 		System.out.println("Added date/time");
-		
+
   }
 
 	//^ All columns defined with their datatype to be used in table creation. These fields will remain constant in every iteration of goalies (No elegant way to do this)

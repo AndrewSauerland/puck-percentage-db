@@ -37,6 +37,7 @@ public class SkaterUploader {
 			Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
 			Statement statement = conn.createStatement();
 			statement.executeUpdate(script);
+      statement.close();
 			conn.close();
 		} catch (SQLException e) {
       System.out.println("Could not create table");
@@ -53,6 +54,7 @@ public class SkaterUploader {
 			Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
 			Statement statement = conn.createStatement();
 			statement.executeUpdate("DELETE FROM " + tableName);
+      statement.close();
 			conn.close();
 		} catch (SQLException e) {
 			System.out.println("Could not clear table");
@@ -97,8 +99,8 @@ public class SkaterUploader {
       }
 
       //Close connections
-      conn.close();
       statement.close();
+      conn.close();
       
     } catch (SQLException e) {
       System.out.println("Could not enter " + valuesEntry);
@@ -124,8 +126,8 @@ public class SkaterUploader {
       statement.executeUpdate("INSERT INTO " + tableName + " (name, situation) VALUES (\"DATE\", \"" + now + " \");");
 
       //Close connections
-      conn.close();
       statement.close();
+      conn.close();
       
     } catch (SQLException e) {
       System.out.println("Could not enter date/time");
