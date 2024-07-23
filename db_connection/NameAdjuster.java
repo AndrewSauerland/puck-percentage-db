@@ -12,14 +12,16 @@ public class NameAdjuster {
   String dbUrl;
   String dbUsername;
   String dbPassword;
+  String year;
   ArrayList<String> namesBefore;
   ArrayList<String> namesAfter;
   ArrayList<String> type;
 
-  public NameAdjuster(String dbUrl, String dbUsername, String dbPassword) {
+  public NameAdjuster(String dbUrl, String dbUsername, String dbPassword, String year) {
     this.dbUrl = dbUrl;
     this.dbUsername = dbUsername;
     this.dbPassword = dbPassword;
+    this.year = year;
     this.namesBefore = new ArrayList<>();
     this.namesAfter = new ArrayList<>();
     this.type = new ArrayList<>();
@@ -30,18 +32,17 @@ public class NameAdjuster {
     //Pull names
     populateNames();
 
-    //format names sequentially and run statement
-    printVariables();
-    //! Here
+    //Format names sequentially and run statement
+    uploadAdjustments();
 
 
   }
 
-
+  //Saves names from columns 
   public void populateNames() {
 
     try {
-      System.out.println("Saving names");
+      System.out.println("Executing adjustments");
 			Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
 			Statement statement = conn.createStatement();
 			ResultSet namesTable = statement.executeQuery("SELECT * FROM names");
@@ -55,21 +56,32 @@ public class NameAdjuster {
       statement.close();
 			conn.close();
 		} catch (SQLException e) {
-      System.out.println("Could pull table");
+      System.out.println("Could not pull table");
 			e.printStackTrace();
 		}
 
   }
 
+  //Cycle through lists and fix names
+  public void uploadAdjustments() {
 
-  public void printVariables() {
+    try {
+      System.out.println("Saving names");
+			Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+			Statement statement = conn.createStatement();
+			
+      for (int i = 0; i < type.size(); i++) {
+        String script = "UPDATE " + type.get(i) + year + " SET name = \'" + namesAfter.get(i) + "\' WHERE name = \'" + namesBefore.get(i) + "\'";
+        statement.executeUpdate(script);
+      }
 
-    for (int i = 0; i < type.size(); i++) {
-      System.out.println("i = " + i);
-      System.out.println("nameBefore = " + namesBefore.get(i));
-      System.out.println("nameAfter = " + namesAfter.get(i));
-      System.out.println("nametype = " + type.get(i));
-    }
+      statement.close();
+			conn.close();
+		} catch (SQLException e) {
+      System.out.println("Could adjust names");
+			e.printStackTrace();
+		}
+
   }
 
 }

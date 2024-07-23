@@ -4,6 +4,7 @@
 import java.io.IOException;
 
 import db_connection.GoalieUploader;
+import db_connection.NameAdjuster;
 import db_connection.SkaterUploader;
 import file_processors.GoalieReader;
 import file_processors.SkaterReader;
@@ -12,6 +13,8 @@ import spider.FileDownloader;
 public class DailyUpdater {
   
   //Variables
+  public static String year = "23";
+
   public static String skatersSheetUrl = "https://moneypuck.com/moneypuck/playerData/seasonSummary/2023/regular/skaters.csv";
   public static String skatersSheetPath = "./lib/downloads/skaters.csv";
 
@@ -55,10 +58,12 @@ public class DailyUpdater {
     System.out.println("Beginning upload...");
 
     SkaterReader sReader = new SkaterReader("lib/downloads/skaters.csv");
-    SkaterUploader sUpload = new SkaterUploader(sReader, databaseEndpoint, databaseUsername, databasePassword, "skaters23"); //!skaters23 will become skaters24
+    SkaterUploader sUpload = new SkaterUploader(sReader, databaseEndpoint, databaseUsername, databasePassword, "skaters" + year); //!skaters23 will become skaters24
 
     GoalieReader gReader = new GoalieReader("lib/downloads/goalies.csv");
-    GoalieUploader gUpload = new GoalieUploader(gReader, databaseEndpoint, databaseUsername, databasePassword, "goalies23"); //!same here
+    GoalieUploader gUpload = new GoalieUploader(gReader, databaseEndpoint, databaseUsername, databasePassword, "goalies" + year); //!same here
+
+    NameAdjuster names = new NameAdjuster(databaseEndpoint, databaseUsername, databasePassword, year);
 
     System.out.println("Uploading skaters...");
     sUpload.clearTable();
@@ -72,7 +77,9 @@ public class DailyUpdater {
     gUpload.addDate();
     System.out.println("Finished uploading goalies");
 
-    //TODO Fix names here
+    System.out.println("Adjusting names...");
+    names.adjust();
+    System.out.println("All specified names have been adjusted");
 
     System.out.println("Updated tables successfully");
 

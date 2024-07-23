@@ -33,7 +33,7 @@ public class SkaterUploader {
 		String script = "CREATE TABLE " + tableName + " ( " + skaterTableColumns + " ); ";
 		
 		try {
-      System.out.println("Creating table " + tableName + " in " + dbUrl);
+      System.out.println("Creating table " + tableName + " in " + dbUrl.substring(dbUrl.lastIndexOf('/')));
 			Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
 			Statement statement = conn.createStatement();
 			statement.executeUpdate(script);

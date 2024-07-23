@@ -50,7 +50,7 @@ public class GoalieUploader {
 	public void clearTable() throws IOException {
 		
 		try {
-			System.out.println("Clearing table " + tableName + " in " + dbUrl);
+			System.out.println("Clearing table " + tableName + " in " + dbUrl.substring(dbUrl.lastIndexOf('/')));
 			Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
 			Statement statement = conn.createStatement();
 			statement.executeUpdate("DELETE FROM " + tableName);
