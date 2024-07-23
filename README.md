@@ -8,4 +8,4 @@
 
 *Third*, names are adjusted as-needed to match previous sheets and current lineups
 
-*Finally*, the date is added in an entry to the skaters table to act as a confirmation for upload
+*Finally*, the date is added in an entry to the tables to act as a confirmation for upload

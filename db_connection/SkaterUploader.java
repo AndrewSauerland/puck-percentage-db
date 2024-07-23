@@ -1,6 +1,7 @@
 package db_connection;
 
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -110,7 +111,29 @@ public class SkaterUploader {
 
   //Adds date in name/situation column to act as version tracker
   public void addDate() {
-    //TODO here
+    
+    LocalDateTime now = LocalDateTime.now();
+    System.out.println("Uploading date/time: " + now);
+
+    try {
+      //Establish connection
+      Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+      Statement statement = conn.createStatement();
+
+      //Execute an insert statement containing all persisting fields and values in this line
+      statement.executeUpdate("INSERT INTO " + tableName + " (name, situation) VALUES (\"DATE\", \"" + now + " \");");
+
+      //Close connections
+      conn.close();
+      statement.close();
+      
+    } catch (SQLException e) {
+      System.out.println("Could not enter date/time");
+      e.printStackTrace();
+    }
+
+		System.out.println("Added date/time");
+
   }
 
   //^ All columns defined with their datatype to be used in table creation. These fields will remain constant in every iteration of skaters (No elegant way to do this)

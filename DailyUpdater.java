@@ -31,6 +31,9 @@ public class DailyUpdater {
     //Include an entry at the end of the databse upload that has the date to ensure upload worked
     updateDatabase();
 
+    //update names
+    //! Here
+
 
 
   }
@@ -47,9 +50,8 @@ public class DailyUpdater {
 
   }
 
-  public static void updateDatabase() throws IOException, ClassNotFoundException {
-    Class.forName("com.mysql.cj.jdbc.Driver");
-    //! Here
+  public static void updateDatabase() throws IOException {
+
     System.out.println("Beginning upload...");
 
     SkaterReader sReader = new SkaterReader("lib/downloads/skaters.csv");
