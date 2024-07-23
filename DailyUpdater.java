@@ -27,16 +27,22 @@ public class DailyUpdater {
 
   public static void main(String args[]) throws IOException, ClassNotFoundException {
 
+    System.out.println(" --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ");
+    System.out.println(" --- --- --- --- --- --- --- ---  Beginning puck-percentage-db Sequence  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ");
+    System.out.println(" --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ");
+
     //Download skaters and goalies csvs
     downloadSheets();
 
     //Parse csv files and upload to database
-    //Include an entry at the end of the databse upload that has the date to ensure upload worked
     updateDatabase();
 
     //update names
-    //! Here
+    updateNames();
 
+    System.out.println(" --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ");
+    System.out.println(" --- --- --- --- --- --- --- ---   puck-percentage-db Sequence Complete  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ");
+    System.out.println(" --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ");
 
 
   }
@@ -58,12 +64,10 @@ public class DailyUpdater {
     System.out.println("Beginning upload...");
 
     SkaterReader sReader = new SkaterReader("lib/downloads/skaters.csv");
-    SkaterUploader sUpload = new SkaterUploader(sReader, databaseEndpoint, databaseUsername, databasePassword, "skaters" + year); //!skaters23 will become skaters24
+    SkaterUploader sUpload = new SkaterUploader(sReader, databaseEndpoint, databaseUsername, databasePassword, "skaters" + year);
 
     GoalieReader gReader = new GoalieReader("lib/downloads/goalies.csv");
-    GoalieUploader gUpload = new GoalieUploader(gReader, databaseEndpoint, databaseUsername, databasePassword, "goalies" + year); //!same here
-
-    NameAdjuster names = new NameAdjuster(databaseEndpoint, databaseUsername, databasePassword, year);
+    GoalieUploader gUpload = new GoalieUploader(gReader, databaseEndpoint, databaseUsername, databasePassword, "goalies" + year);
 
     System.out.println("Uploading skaters...");
     sUpload.clearTable();
@@ -77,11 +81,17 @@ public class DailyUpdater {
     gUpload.addDate();
     System.out.println("Finished uploading goalies");
 
+    System.out.println("Updated tables successfully");
+
+  }
+
+  public static void updateNames() throws IOException {
+
+    NameAdjuster names = new NameAdjuster(databaseEndpoint, databaseUsername, databasePassword, year);
+
     System.out.println("Adjusting names...");
     names.adjust();
     System.out.println("All specified names have been adjusted");
-
-    System.out.println("Updated tables successfully");
 
   }
 
