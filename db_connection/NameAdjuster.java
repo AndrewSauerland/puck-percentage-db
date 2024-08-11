@@ -75,10 +75,14 @@ public class NameAdjuster {
         statement.executeUpdate(script);
       }
 
+      //Aho parity
+      statement.executeUpdate("UPDATE skaters" + year + " SET name = \'Sebastian AhoF\' WHERE name = \'Sebastian Aho\' AND position = \'C\'");
+      statement.executeUpdate("UPDATE skaters" + year + " SET name = \'Sebastian AhoD\' WHERE name = \'Sebastian Aho\' AND position = \'D\'");
+
       statement.close();
 			conn.close();
 		} catch (SQLException e) {
-      System.out.println("Could adjust names");
+      System.out.println("Couldn't adjust names");
 			e.printStackTrace();
 		}
 
