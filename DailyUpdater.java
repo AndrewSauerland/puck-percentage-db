@@ -13,12 +13,12 @@ import spider.FileDownloader;
 public class DailyUpdater {
   
   //Variables
-  public static String year = "23";
+  public static String year = "24";
 
-  public static String skatersSheetUrl = "https://moneypuck.com/moneypuck/playerData/seasonSummary/2023/regular/skaters.csv";
+  public static String skatersSheetUrl = "https://moneypuck.com/moneypuck/playerData/seasonSummary/2024/regular/skaters.csv";
   public static String skatersSheetPath = "./lib/downloads/skaters.csv";
 
-  public static String goaliesSheetUrl = "https://moneypuck.com/moneypuck/playerData/seasonSummary/2023/regular/goalies.csv";
+  public static String goaliesSheetUrl = "https://moneypuck.com/moneypuck/playerData/seasonSummary/2024/regular/goalies.csv";
   public static String goaliesSheetPath = "./lib/downloads/goalies.csv";
 
   public static String databaseEndpoint = System.getenv("DATABASE_URL");

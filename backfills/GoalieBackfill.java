@@ -10,13 +10,13 @@ public class GoalieBackfill {
 
   public static void main(String args[]) throws IOException, ClassNotFoundException {
 
-    int year = 2015;
+    int year = 2008;
     String databaseUrl = System.getenv("DATABASE_URL");
     String databaseUsername = System.getenv("DATABASE_USERNAME");
     String databasePassword = System.getenv("DATABASE_PASSWORD");
 
     //Loop through years 2015-2023 of hockey sheets and sequentially create/upload each collection to sql
-    while (year <= 2023) {
+    while (year <= 2014) {
 
       System.out.println("Beginning year " + year);
 
